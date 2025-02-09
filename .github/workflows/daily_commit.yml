@@ -3,7 +3,7 @@ name: Daily Commit
 on:
   push:
     branches:
-      - main
+      - master
   schedule:
     # Runs at 12:00 UTC every day
     - cron: "00 12 * * *"
