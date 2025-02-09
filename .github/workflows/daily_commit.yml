@@ -1,0 +1,31 @@
+name: Daily Commit
+
+on:
+  schedule:
+    # Runs at 12:00 UTC every day
+    - cron: "0 12 * * *"
+  workflow_dispatch:  # This allows you to trigger it manually too.
+
+jobs:
+  daily-commit:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the repository to modify files
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Create a dummy file to simulate a change
+      - name: Add dummy file with email in its name
+        run: |
+          echo "This commit was created by GitHub Actions." > "daily_commit_$(date +'%Y-%m-%d').txt"
+          echo "Email: 24f2006749@ds.study.iitm.ac.in" >> "daily_commit_$(date +'%Y-%m-%d').txt"
+      
+      # Commit and push changes
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add .
+          git commit -m "Automated daily commit [skip ci]" || exit 0
+          git push
