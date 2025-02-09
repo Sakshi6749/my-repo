@@ -1,9 +1,12 @@
 name: Daily Commit
 
 on:
+  push:
+    branches:
+      - main
   schedule:
     # Runs at 12:00 UTC every day
-    - cron: "05 19 * * *"
+    - cron: "00 12 * * *"
   workflow_dispatch:  # This allows you to trigger it manually too.
 
 jobs:
